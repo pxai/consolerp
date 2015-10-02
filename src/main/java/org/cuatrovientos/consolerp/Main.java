@@ -26,12 +26,17 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("city");
 
 			option = reader.nextLine();
 
 			switch (option) {
 			case "customer":
 				tableManager = new ManageCustomer(reader);
+				tableManager.manage();
+				break;
+			case "city":
+				tableManager = new ManageCity(reader);
 				tableManager.manage();
 				break;
 			case "exit":
