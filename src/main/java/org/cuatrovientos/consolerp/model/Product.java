@@ -8,7 +8,7 @@ package org.cuatrovientos.consolerp.model;
  *
  */
 public class Product {
-	private int clave;
+	private int id;
 	private String name;
 	private float price;
 	
@@ -26,19 +26,19 @@ public class Product {
 	 */
 	public Product(int clave, String name, float price) {
 		super();
-		this.clave = clave;
+		this.id = clave;
 		this.name = name;
 		this.price = price;
 	}
 
 	
 	public int getClave() {
-		return clave;
+		return id;
 	}
 
 
 	public void setClave(int clave) {
-		this.clave = clave;
+		this.id = clave;
 	}
 
 
@@ -64,7 +64,7 @@ public class Product {
 	
 	@Override
 	public String toString() {
-		return "Product [clave=" + clave + ", name=" + name + ", price=" + price + "]";
+		return "Product [clave=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 	
 	
