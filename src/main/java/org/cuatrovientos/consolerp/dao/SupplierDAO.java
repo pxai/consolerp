@@ -60,7 +60,7 @@ public class SupplierDAO {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("select * from supplier where id = ? ");
 
-			//preparedStatement.setInt(1, 2); ?
+			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -110,11 +110,11 @@ public class SupplierDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update supplier set name=? where id=?");
+					connection.prepareStatement("update supplier set name=?, phone=? where id=?");
 
-			//preparedStatement.setString(1, supplier.getName());
-			//preparedStatement.setInt(2, supplier.getId());
-			preparedStatement.setString(3, supplier.getPhone());
+			preparedStatement.setString(1, supplier.getName());
+			preparedStatement.setString(2, supplier.getPhone());
+			preparedStatement.setInt(3, supplier.getId());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
