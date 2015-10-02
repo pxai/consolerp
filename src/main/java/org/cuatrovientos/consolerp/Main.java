@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
+import org.cuatrovientos.consolerp.dao.UserDAO;
 import org.cuatrovientos.consolerp.model.Customer;
 
 /**
@@ -63,6 +64,12 @@ public class Main {
 		
 
 	}
+	
+private static void manageUser(Scanner reader, UserDAO bd) {
+		
+
+	}
+
 
 
 }
