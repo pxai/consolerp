@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
+import org.cuatrovientos.consolerp.dao.RoleDAO;
 import org.cuatrovientos.consolerp.model.Customer;
 
 /**
@@ -26,12 +27,17 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("role");
 
 			option = reader.nextLine();
 
 			switch (option) {
 			case "customer":
 				tableManager = new ManageCustomer(reader);
+				tableManager.manage();
+				break;
+			case "role":
+				tableManager = new ManageRole(reader);
 				tableManager.manage();
 				break;
 			case "exit":
@@ -57,6 +63,17 @@ public class Main {
 		
 
 	}
+	/**
+	 * Manage Role
+	 * 
+	 * @param id
+	 * @param reader
+	 * @param bd
+	 * @return
+	 */
+	private static void manageRole(Scanner reader, RoleDAO bd) {
+		
 
+	}
 
 }

@@ -7,8 +7,7 @@ import org.cuatrovientos.consolerp.dao.RoleDAO;
 import org.cuatrovientos.consolerp.model.Role;
 
 
-public class ManageRole 
-extends ManageTable {
+public class ManageRole extends ManageTable {
 
 private RoleDAO roleDAO;
 private Scanner reader;
