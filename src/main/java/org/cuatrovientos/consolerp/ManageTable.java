@@ -7,6 +7,7 @@ package org.cuatrovientos.consolerp;
  * Interface that management code must implement
  * @author oskar
  *
+ *
  */
 public class ManageTable {
 	public void manage () {
