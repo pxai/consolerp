@@ -1,10 +1,10 @@
 package org.cuatrovientos.consolerp;
 
 import java.util.Scanner;
-import java.util.Vector;
+
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
-import org.cuatrovientos.consolerp.model.Customer;
+
 
 /**
  * Main entrypoint for consolerp project
@@ -15,9 +15,6 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello DAM");
 		String option = "0";
-		int id = 0;
-		String name = "";
-		Customer customer = null;
 		Scanner reader = new Scanner(System.in);
 		
 		// Interface for table management
