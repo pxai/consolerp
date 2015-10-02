@@ -110,6 +110,7 @@ public class RoleDAO {
 
 			preparedStatement.setString(1, role.getName());
 			preparedStatement.setInt(2, role.getId());
+			preparedStatement.setString(3, role.getDescription());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
