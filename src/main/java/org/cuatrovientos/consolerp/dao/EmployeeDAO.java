@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.Employee;
+import org.cuatrovientos.consolerp.model.Employee;
 
 /**
  * 
@@ -120,5 +121,25 @@ public class EmployeeDAO {
 			return -1;
 		} 
 		return result[0];
+	}
+	public Employee selectById(int id) {
+		Employee employee = new Employee();
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from employee where id = ? ");
+
+			preparedStatement.setInt(1, 3);
+			preparedStatement.addBatch();
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+			 employee = new Employee(resultSet.getInt("id"), resultSet.getString("name"),resultSet.getString("phone"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return employee;
 	}
 }
