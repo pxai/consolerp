@@ -35,6 +35,10 @@ public class Main {
 				tableManager = new ManageCustomer(reader);
 				tableManager.manage();
 				break;
+			case "user":
+				tableManager = new ManageUser(reader);
+				tableManager.manage();
+				break;
 			
 			case "exit":
 				System.out.println("Bye!");
