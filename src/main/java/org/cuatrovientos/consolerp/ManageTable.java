@@ -8,6 +8,7 @@ package org.cuatrovientos.consolerp;
  * @author oskar
  *
  *
+ *
  */
 public class ManageTable {
 	public void manage () {
