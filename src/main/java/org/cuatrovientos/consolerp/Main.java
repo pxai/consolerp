@@ -35,6 +35,7 @@ public class Main {
 				tableManager = new ManageCustomer(reader);
 				tableManager.manage();
 				break;
+			
 			case "exit":
 				System.out.println("Bye!");
 				break;
