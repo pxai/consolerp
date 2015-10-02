@@ -50,7 +50,7 @@ public class ProductDAO {
 	}
 
 	/**
-	 * select one Customer
+	 * select one product
 	 * @param id
 	 * @return
 	 */
@@ -76,8 +76,8 @@ public class ProductDAO {
 	}
 
 	/**
-	 * insert new customer
-	 * @param customer
+	 * insert new product
+	 * @param product
 	 * @return
 	 */
 	public int insert(Product product) {
@@ -85,9 +85,10 @@ public class ProductDAO {
 		try {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("insert into product values (?,?,?)");
-//SEGUIR AQUIIIIIIIIIIIIIIIII
-		//	preparedStatement.setInt(1, customer.getId());
-		//	preparedStatement.setString(2, customer.getName());
+
+			preparedStatement.setInt(1, product.getId());
+			preparedStatement.setString(2, product.getName());
+			preparedStatement.setFloat(3, product.getPrice());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -101,18 +102,19 @@ public class ProductDAO {
 	}
 
 	/**
-	 * updates a Customer
-	 * @param customer
+	 * updates a Product
+	 * @param product
 	 * @return
 	 */
-	public int update(Customer customer) {
+	public int update(Product product) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update customer set name=? where id=?");
+					connection.prepareStatement("update product set name=?, price=? where id=?");
 
-			preparedStatement.setString(1, customer.getName());
-			preparedStatement.setInt(2, customer.getId());
+			preparedStatement.setString(1, product.getName());
+			preparedStatement.setFloat(2, product.getPrice());
+			preparedStatement.setInt(3, product.getId());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -126,14 +128,14 @@ public class ProductDAO {
 	}
 
 	/**
-	 * delete one customer
+	 * delete one product
 	 * @return
 	 */
 	public int delete(int id) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("delete from customer where id=?");
+					connection.prepareStatement("delete from product where id=?");
 
 			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();

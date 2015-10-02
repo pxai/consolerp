@@ -32,13 +32,13 @@ public class Product {
 	}
 
 	
-	public int getClave() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setClave(int clave) {
-		this.id = clave;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
