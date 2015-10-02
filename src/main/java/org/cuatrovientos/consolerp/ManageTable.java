@@ -5,7 +5,7 @@ package org.cuatrovientos.consolerp;
 
 /**
  * Interface that management code must implement
- * @author user
+ * @author oskar
  *
  */
 public class ManageTable {
@@ -15,6 +15,7 @@ public class ManageTable {
 	
 	/**
 	 * shows menu for a given entity
+	 * 
 	 */
 	protected void showMenu(String entity) {
 		System.out.println("Enter option");
