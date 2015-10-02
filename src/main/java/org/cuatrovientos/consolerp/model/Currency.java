@@ -4,7 +4,7 @@
 package org.cuatrovientos.consolerp.model;
 
 /**
- * @author segoitz_guibert
+ * @author segoitz-guibert
  *
  */
 public class Currency {
