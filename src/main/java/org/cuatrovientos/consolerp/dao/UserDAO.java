@@ -42,7 +42,7 @@ public class UserDAO {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("select * from user where id = ? ");
 
-			preparedStatement.setInt(1, 2);
+			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -55,6 +55,27 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return user;
+	}
+	public User selectByLogin (String login) {
+		User user = new User();
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from user where login = ? ");
+
+			preparedStatement.setString(1, login);
+			preparedStatement.addBatch();
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+			 user = new User(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("password"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return user;
+		
 	}
 	public int insert(User user) {
 		int[] result;
