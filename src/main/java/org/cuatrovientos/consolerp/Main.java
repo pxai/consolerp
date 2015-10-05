@@ -28,6 +28,7 @@ public class Main {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
 			System.out.println("role");
+			System.out.println("employee");
 
 			option = reader.nextLine();
 
