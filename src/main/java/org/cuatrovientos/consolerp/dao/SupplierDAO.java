@@ -240,8 +240,8 @@ public class SupplierDAO {
         	for (int i = 0; i < suppliers.size(); i++) {
         		Supplier supplier = suppliers.elementAt(i);
         		writer.append("" + supplier.getId());
-        		writer.append("" + supplier.getName());
-        		writer.append("" + supplier.getPhone());
+        		writer.append("," + supplier.getName());
+        		writer.append("," + supplier.getPhone());
         		writer.append("\n");
 			}
     			
