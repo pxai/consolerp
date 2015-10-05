@@ -42,7 +42,7 @@ public class ManageCustomer
 				customer = customerDAO.selectById(id);
 				System.out.println(customer.toString());
 				break;
-			case "3":
+			case "4":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -50,7 +50,7 @@ public class ManageCustomer
 				customer = new Customer(id, name);
 				customerDAO.insert(customer);
 				break;
-			case "4":
+			case "5":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -58,16 +58,30 @@ public class ManageCustomer
 				customer = new Customer(id, name);
 				customerDAO.update(customer);
 				break;
-			case "5":
+			case "6":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				customerDAO.delete(id);
+				break;
+			case "7":
+				System.out.println("Enter a CSV filename to Import");
+				name = reader.nextLine();
+				customerDAO.importCSV(name);
+				break;
+			case "8":
+				System.out.println("Enter a CSV filename to Export");
+				name = reader.nextLine();
+				customerDAO.exportCSV(name);
 				break;
 			default:
 				System.out.println("Ok, see you around");
 				break;
 			}
-		} while (!option.equals("6"));
+			default:
+				System.out.println("Ok, see you around");
+				break;
+			}
+		} while (!option.equals("9"));
 	}
 
 }

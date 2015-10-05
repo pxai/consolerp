@@ -3,6 +3,10 @@
  */
 package org.cuatrovientos.consolerp.dao;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +16,7 @@ import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.Customer;
+import org.cuatrovientos.consolerp.model.Supplier;
 
 /**
  * @author Pello Altadill
@@ -74,6 +79,28 @@ public class CustomerDAO {
 		}
 		return customer;
 	}
+	
+	public Customer selectByName(String name) {
+		Customer customer = new Customer();
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from customer where name like '%" + name + "%'");
+
+			//preparedStatement.setInt(1, 2);
+			preparedStatement.addBatch();
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+			 customer = new Customer(resultSet.getInt("id"), resultSet.getString("name"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return customer;
+	}
+	
 
 	/**
 	 * insert new customer
@@ -146,6 +173,79 @@ public class CustomerDAO {
 			return -1;
 		} 
 		return result[0];
+	}
+	
+	/**
+	 * Import CSV File method
+	 * @param name
+	 */
+	public void importCSV(String name) {
+		
+        String fileToParse = name + ".csv";
+        BufferedReader fileReader = null;
+         
+        final String DELIMITER = ",";
+        
+        try
+        {
+            String line = "";
+            fileReader = new BufferedReader(new FileReader(fileToParse));
+            
+            while ((line = fileReader.readLine()) != null)
+            {
+                //Get all tokens available in line
+                String[] register = line.split(DELIMITER);
+                Customer customer = new Customer(Integer.parseInt(register[0]),register[1]);
+                insert(customer);
+                for(String registers : register)
+                {
+                    //Print all tokens
+                    System.out.println(registers);
+                }
+            }
+        }
+        catch (Exception e) {
+        	System.err.println("Exception " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+
+        try {
+        	fileReader.close();
+        } catch (IOException e) {
+        	System.err.println("Exception " + e.getMessage());
+        	e.printStackTrace();
+        }
+
+	}
+	
+	/**
+	 * Export CSV File method
+	 * @param name
+	 */
+	public void exportCSV(String name) {
+		
+		Vector<Customer> customers = selectAll();
+		
+        String fileToParse = name + ".csv";
+         
+        try {
+        	FileWriter writer = new FileWriter(fileToParse);
+        	
+        	for (int i = 0; i < customers.size(); i++) {
+        		Customer customer = customers.elementAt(i);
+        		writer.append("" + customer.getId());
+        		writer.append("" + customer.getName());
+        		writer.append("\n");
+			}
+    			
+    	    writer.flush();
+    	    writer.close();
+    	}
+    	catch(IOException e) {
+    	     e.printStackTrace();
+    	}
+        
 	}
 
 }
