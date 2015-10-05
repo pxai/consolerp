@@ -245,7 +245,6 @@ public class SupplierDAO {
         		writer.append("\n");
 			}
     			
-    	    writer.flush();
     	    writer.close();
     	}
     	catch(IOException e) {
