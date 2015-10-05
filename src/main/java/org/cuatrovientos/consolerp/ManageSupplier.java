@@ -44,6 +44,12 @@ public class ManageSupplier
 				System.out.println(supplier.toString());
 				break;
 			case "3":
+				System.out.println("Enter a name");
+				name = reader.nextLine();
+				supplier = supplierDAO.selectByName(name);
+				System.out.println(supplier.toString());
+				break;
+			case "4":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -53,7 +59,7 @@ public class ManageSupplier
 				supplier = new Supplier(id, name, phone);
 				supplierDAO.insert(supplier);
 				break;
-			case "4":
+			case "5":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -63,16 +69,26 @@ public class ManageSupplier
 				supplier = new Supplier(id, name, phone);
 				supplierDAO.update(supplier);
 				break;
-			case "5":
+			case "6":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				supplierDAO.delete(id);
+				break;
+			case "7":
+				System.out.println("Enter a CSV filename to Import");
+				name = reader.nextLine();
+				supplierDAO.importCSV(name);
+				break;
+			case "8":
+				System.out.println("Enter a CSV filename to Export");
+				name = reader.nextLine();
+				supplierDAO.exportCSV(name);
 				break;
 			default:
 				System.out.println("Ok, see you around");
 				break;
 			}
-		} while (!option.equals("6"));
+		} while (!option.equals("9"));
 	}
 
 }

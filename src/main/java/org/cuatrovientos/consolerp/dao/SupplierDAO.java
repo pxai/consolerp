@@ -50,7 +50,7 @@ public class SupplierDAO {
 	}
 
 	/**
-	 * select one Customer
+	 * select one Customer by Id
 	 * @param id
 	 * @return
 	 */
@@ -74,7 +74,33 @@ public class SupplierDAO {
 		}
 		return supplier;
 	}
+	
+	/**
+	 * Select One Customer by name
+	 * @param name
+	 * @return
+	 */
+	public Supplier selectByName(String name) {
+		Supplier supplier = new Supplier();
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from supplier where name like '%" + name + "%'");
 
+			//preparedStatement.setString(1, name);
+			preparedStatement.addBatch();
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+			 supplier = new Supplier(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("phone"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return supplier;
+	}
+	
 	/**
 	 * insert new customer
 	 * @param customer
@@ -148,6 +174,16 @@ public class SupplierDAO {
 			return -1;
 		} 
 		return result[0];
+	}
+
+	public void importCSV(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void exportCSV(String name) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
