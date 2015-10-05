@@ -142,5 +142,24 @@ public class CityDAO {
 		} 
 		return result[0];
 	}
+	public Vector<City> selectByName(String name){
+		Vector<City> cities = new Vector<City>();
+		String select = "select * from city where name ="+name+"";
+		Statement statement;
+		try {
+			statement = connection.createStatement();
 
+			ResultSet resultSet = statement.executeQuery(select);
+			while (resultSet.next()) {
+				City city = new City(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("zipcode"));
+				cities.addElement(city);
+			}
+	
+	} catch (SQLException e) {
+		System.err.println("Exception " + e.getMessage());
+		e.printStackTrace();
+	}
+		
+	return cities;
+}
 }
