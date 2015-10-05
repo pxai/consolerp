@@ -42,6 +42,12 @@ public class ManageCustomer
 				customer = customerDAO.selectById(id);
 				System.out.println(customer.toString());
 				break;
+			case "3":
+				System.out.println("Enter a name");
+				name = reader.nextLine();
+				customer = customerDAO.selectByName(name);
+				System.out.println(customer.toString());
+				break;
 			case "4":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
@@ -77,10 +83,7 @@ public class ManageCustomer
 				System.out.println("Ok, see you around");
 				break;
 			}
-			default:
-				System.out.println("Ok, see you around");
-				break;
-			}
+
 		} while (!option.equals("9"));
 	}
 
