@@ -61,10 +61,7 @@ public class Main {
 				tableManager = new ManageCurrency(reader);
 				tableManager.manage();
 				break;
-			case "currency":
-				tableManager = new ManageCurrency(reader);
-				tableManager.manage();
-				break;
+			
 			case "exit":
 				System.out.println("Bye!");
 				break;
