@@ -16,7 +16,6 @@ import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.Customer;
-import org.cuatrovientos.consolerp.model.Supplier;
 
 /**
  * @author Pello Altadill
