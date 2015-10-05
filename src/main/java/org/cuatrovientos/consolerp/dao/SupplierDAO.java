@@ -3,6 +3,10 @@
  */
 package org.cuatrovientos.consolerp.dao;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -176,14 +180,78 @@ public class SupplierDAO {
 		return result[0];
 	}
 
+	/**
+	 * Import CSV File method
+	 * @param name
+	 */
 	public void importCSV(String name) {
-		// TODO Auto-generated method stub
 		
-	}
+        String fileToParse = name + ".csv";
+        BufferedReader fileReader = null;
+         
+        final String DELIMITER = ",";
+        
+        try
+        {
+            String line = "";
+            fileReader = new BufferedReader(new FileReader(fileToParse));
+            
+            while ((line = fileReader.readLine()) != null)
+            {
+                //Get all tokens available in line
+                String[] register = line.split(DELIMITER);
+                Supplier supplier = new Supplier(Integer.parseInt(register[0]),register[1],register[2]);
+                insert(supplier);
+                for(String registers : register)
+                {
+                    //Print all tokens
+                    System.out.println(registers);
+                }
+            }
+        }
+        catch (Exception e) {
+        	System.err.println("Exception " + e.getMessage());
+            e.printStackTrace();
+        }
+        
 
+        try {
+        	fileReader.close();
+        } catch (IOException e) {
+        	System.err.println("Exception " + e.getMessage());
+        	e.printStackTrace();
+        }
+
+	}
+	
+	/**
+	 * Export CSV File method
+	 * @param name
+	 */
 	public void exportCSV(String name) {
-		// TODO Auto-generated method stub
 		
+		Vector<Supplier> suppliers = selectAll();
+		
+        String fileToParse = name + ".csv";
+         
+        try {
+        	FileWriter writer = new FileWriter(fileToParse);
+        	
+        	for (int i = 0; i < suppliers.size(); i++) {
+        		Supplier supplier = suppliers.elementAt(i);
+        		writer.append("" + supplier.getId());
+        		writer.append("" + supplier.getName());
+        		writer.append("" + supplier.getPhone());
+        		writer.append("\n");
+			}
+    			
+    	    writer.flush();
+    	    writer.close();
+    	}
+    	catch(IOException e) {
+    	     e.printStackTrace();
+    	}
+        
 	}
 
 }
