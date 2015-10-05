@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.City;
@@ -162,5 +167,37 @@ public class CityDAO {
 		
 	return cities;
 }
-	
+	public Vector<City> importFromCSV(){
+		Vector<City> cities = new Vector<City>();
+		String csvFile = "/consolerp/import.csv";
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		try {
+
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+			        // use comma as separator
+				String[] city = line.split(cvsSplitBy);
+				City city1 = new City(Integer.parseInt(city[0]), city[1], Integer.parseInt(city[2]));
+				cities.add(city1);
+
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return cities;
+	}
 }
