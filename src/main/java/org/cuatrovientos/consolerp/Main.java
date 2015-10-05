@@ -34,6 +34,8 @@ public class Main {
 
 			System.out.println("employee");
 
+			System.out.println("payroll");
+			
 			option = reader.nextLine();
 
 			switch (option) {
@@ -52,6 +54,10 @@ public class Main {
 				break;
 			case "city":
 				tableManager = new ManageCity(reader);
+				tableManager.manage();
+				break;
+			case "payroll":
+				tableManager = new ManagePayroll(reader);
 				tableManager.manage();
 				break;
 			case "exit":
