@@ -110,11 +110,11 @@ public class CurrencyDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update currency set name=? where id=?");
+					connection.prepareStatement("update currency set name=?, abbreviation=? where id=?");
 
 			preparedStatement.setString(1, currency.getName());
-			preparedStatement.setInt(2, currency.getId());
-			preparedStatement.setString(3, currency.getAbbreviation());
+			preparedStatement.setInt(3, currency.getId());
+			preparedStatement.setString(2, currency.getAbbreviation());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -152,9 +152,6 @@ public class CurrencyDAO {
 	
 	
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 }
