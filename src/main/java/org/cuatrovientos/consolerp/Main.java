@@ -37,6 +37,10 @@ public class Main {
 				tableManager = new ManageCustomer(reader);
 				tableManager.manage();
 				break;
+			case "employee":
+				tableManager = new ManageEmployee(reader);
+				tableManager.manage();
+				break;
 			case "role":
 				tableManager = new ManageRole(reader);
 				tableManager.manage();
