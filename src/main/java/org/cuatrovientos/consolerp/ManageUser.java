@@ -22,6 +22,7 @@ public void manage() {
 	String option;
 	String login;
 	String password;
+	
 	User user;
 	int id = 0;
 	do {
@@ -66,11 +67,17 @@ public void manage() {
 			id = Integer.parseInt(reader.nextLine());
 			userDAO.delete(id);
 			break;
+		case "6":
+			System.out.println("Enter a login");
+			login = reader.nextLine();
+			user = userDAO.selectByLogin(login);
+			System.out.println(user.toString());
+			
 		default:
 			System.out.println("Ok, see you around");
 			break;
 		}
-	} while (!option.equals("6"));
+	} while (!option.equals("7"));
 }
 
 }

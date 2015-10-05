@@ -23,6 +23,7 @@ public class ManageTable {
 		System.out.println("3.- Insert " + entity);
 		System.out.println("4.- Update " + entity);
 		System.out.println("5.- Delete " + entity);
-		System.out.println("6. Exit");
+		System.out.println("6.-Select by login");
+		System.out.println("7. Exit");
 	}
 }
