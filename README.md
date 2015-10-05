@@ -15,4 +15,8 @@ Or [download the zip](https://github.com/pxai/consolerp/archive/master.zip) like
 ## Credits
 All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Pello, branch pushed
-+ cilvet, nothing done yet
+
++ cilvet, all done already
+
++ Gaizka Gorraiz
+
