@@ -2,6 +2,7 @@ package org.cuatrovientos.consolerp.model;
 /**
  * 
  * @author OSKAR
+ * 
  *
  */
 public class Department {
