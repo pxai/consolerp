@@ -122,6 +122,11 @@ public class EmployeeDAO {
 		} 
 		return result[0];
 	}
+	/**
+	 * select by id
+	 * @param id
+	 * @return
+	 */
 	public Employee selectById(int id) {
 		Employee employee = new Employee();
 		try {
@@ -141,5 +146,34 @@ public class EmployeeDAO {
 			e.printStackTrace();
 		}
 		return employee;
+	}
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Employee selectByName(String name){
+		Employee employee = new Employee();
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from employee where name = '"+name+"'");
+
+			preparedStatement.setString(1,name);
+			preparedStatement.addBatch();
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+			 employee = new Employee(resultSet.getInt("id"), resultSet.getString("name"),resultSet.getString("phone"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return employee;
+	}
+	
+	public void importCVS (){
+		
 	}
 }
