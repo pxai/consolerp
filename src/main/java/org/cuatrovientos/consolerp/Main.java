@@ -19,6 +19,7 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("currency");
 
 			System.out.println("currency");
 
@@ -54,6 +55,10 @@ public class Main {
 				break;
 			case "payroll":
 				tableManager = new ManagePayroll(reader);
+				tableManager.manage();
+				break;
+			case "currency":
+				tableManager = new ManageCurrency(reader);
 				tableManager.manage();
 				break;
 			case "currency":
