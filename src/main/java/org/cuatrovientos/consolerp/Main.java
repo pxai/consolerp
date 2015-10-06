@@ -1,5 +1,8 @@
 package org.cuatrovientos.consolerp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -54,6 +57,30 @@ public class Main {
 
 			}
 		} while (!option.equals("exit"));
+		
+		//Writting
+		String fileName = "roles.txt";
+		try {
+			PrintWriter outputStream = new PrintWriter(fileName);
+			outputStream.println("Roles!");
+			outputStream.close();
+			System.out.println("Done.");
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		//Reading
+		//String fileName = "roles.csv";
+		File file = new File(fileName);
+		Scanner inputStream = new Scanner(fileName);
+		while (inputStream.hasNext()){
+			String data = inputStream.next();
+			String[] values = data.split(",");
+			System.out.println(data);
+		}
+		inputStream.close();
+		
 	}
 	
 }
