@@ -6,6 +6,12 @@ import java.util.Scanner;
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
 
+import org.cuatrovientos.consolerp.dao.UserDAO;
+import org.cuatrovientos.consolerp.model.Customer;
+
+
+import org.cuatrovientos.consolerp.dao.DelegationDAO;
+import org.cuatrovientos.consolerp.model.Delegation;
 
 /**
  * Main entrypoint for consolerp project
@@ -16,6 +22,10 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello DAM");
 		String option = "0";
+		int id = 0;
+		String name = "";
+		Customer customer = null;
+		Delegation delegation = null;
 		Scanner reader = new Scanner(System.in);
 		
 		// Interface for table management
@@ -24,6 +34,10 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("delegation");
+
+			System.out.println("user");
+
 			System.out.println("currency");
 			System.out.println("supplier");
 			System.out.println("stock");
@@ -33,11 +47,16 @@ public class Main {
 			System.out.println("payroll");
 
 
+
 			option = reader.nextLine();
 
 			switch (option) {
 			case "customer":
 				tableManager = new ManageCustomer(reader);
+				tableManager.manage();
+				break;
+			case "delegation":
+				tableManager = new ManageDelegation(reader);
 				tableManager.manage();
 				break;
 
@@ -68,6 +87,11 @@ public class Main {
 				tableManager = new ManageSupplier(reader);
 				tableManager.manage();
 				break;
+			case "user":
+				tableManager = new ManageUser(reader);
+				tableManager.manage();
+				break;
+			
 			case "exit":
 				System.out.println("Bye!");
 				break;
@@ -77,5 +101,16 @@ public class Main {
 
 			}
 		} while (!option.equals("exit"));
+	
 	}
+	private static void manageDelegation(Scanner reader, DelegationDAO bd) {
+		
+
+	}
+
+
 }
+
+
+
+
