@@ -27,3 +27,6 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 
 + Begoña Lopez
 
++ Oskar Compains Iso(Scrum Master)
+
+
