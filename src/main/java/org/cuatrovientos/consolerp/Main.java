@@ -7,7 +7,12 @@ import org.cuatrovientos.consolerp.dao.CustomerDAO;
 import org.cuatrovientos.consolerp.model.Customer;
 
 /**
+<<<<<<< Upstream, based on ivan
  * 
+=======
+ * programa principal
+ * Main entrypoint for consolerp project
+>>>>>>> ab9a879 First commit
  * 
  * @author 2DAM
  */

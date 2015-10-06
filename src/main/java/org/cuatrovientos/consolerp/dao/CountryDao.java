@@ -54,8 +54,9 @@ public class CountryDao {
 		Country country = new Country();
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("select * from country where id = ? ");
 
+					connection.prepareStatement("select * from country where id = ? ");
+					
 			preparedStatement.setInt(1, 2);
 			preparedStatement.addBatch();
 			
