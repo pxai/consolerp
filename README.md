@@ -16,9 +16,6 @@ Or [download the zip](https://github.com/pxai/consolerp/archive/master.zip) like
 All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Pello, branch pushed
 
-
-
-
 + Bassbeats, branch hyperPushed
 
 + cilvet, all done already
@@ -28,6 +25,8 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Begoña Lopez
 
 + Oskar Compains Iso(Scrum Master)
+
++Yeray García
 
 
 
