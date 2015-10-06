@@ -55,8 +55,8 @@ public class DepartmentDAO {
 	 * @param id
 	 * @return
 	 */
-	public Customer selectById(int id) {
-		Customer customer = new Customer();
+	public Department selectById(int id) {
+		Department department = new Department();
 		try {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("select * from customer where id = ? ");
@@ -67,18 +67,19 @@ public class DepartmentDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-			 customer = new Customer(resultSet.getInt("id"), resultSet.getString("name"));
+			 department = new Department(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("Description"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return customer;
+		return department;
 	}
 
 	/**
-	 * insert new customer
-	 * @param customer
+	 * comit sobre comiit, y sobre comit uuno
+	 * insert new department
+	 * @param department
 	 * @return
 	 */
 	public int insert(Customer customer) {
