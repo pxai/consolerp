@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package org.cuatrovientos.consolerp.dao;
 
 import java.sql.Connection;
@@ -8,26 +11,27 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
-import org.cuatrovientos.consolerp.model.Role;
+import org.cuatrovientos.consolerp.model.Currency;
+import org.cuatrovientos.consolerp.model.Customer;
 
-
-
-public class RoleDAO {
-
-
+/**
+ * @author segoitz-guibert
+ *
+ */
+public class CurrencyDAO {
+	
 	private Connection connection;
-
-	public RoleDAO() {
+	
+	public CurrencyDAO(){
 		connection = new DataSource().getConnection();
 	}
-
 	/**
-	 * select all customers
+	 * select all currencies
 	 * @return
 	 */
-	public Vector<Role> selectAll() {
-		Vector<Role> roles = new Vector<Role>();
-		String select = "select * from role ";
+	public Vector<Currency> selectAll() {
+		Vector<Currency> currencies = new Vector<Currency>();
+		String select = "select * from currency ";
 		Statement statement;
 		try {
 			statement = connection.createStatement();
@@ -35,26 +39,26 @@ public class RoleDAO {
 			ResultSet resultSet = statement.executeQuery(select);
 
 			while (resultSet.next()) {
-				Role customer = new Role(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
-				roles.addElement(customer);
+				Currency currency= new Currency(resultSet.getInt("id"), resultSet.getString("name"),resultSet.getString("abbreviation"));
+				currencies.addElement(currency);
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return roles;
+		return currencies;
 	}
 
 	/**
-	 * select one Role
+	 * select one Currency
 	 * @param id
 	 * @return
 	 */
-	public Role selectById(int id) {
-		Role role = new Role();
+	public Currency selectById(int id) {
+		Currency currency = new Currency();
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("select * from role where id = ? ");
+					connection.prepareStatement("select * from currency where id = ? ");
 
 			preparedStatement.setInt(1, 2);
 			preparedStatement.addBatch();
@@ -62,29 +66,29 @@ public class RoleDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-			 role = new Role(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
+			 currency = new Currency(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("abbreviation"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return role;
+		return currency;
 	}
 
 	/**
-	 * insert new customer
-	 * @param customer
+	 * insert new currency
+	 * @param currency
 	 * @return
 	 */
-	public int insert(Role role) {
+	public int insert(Currency currency) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("insert into role values (?,?,?)");
+					connection.prepareStatement("insert into currency values (?,?,?)");
 
-			preparedStatement.setInt(1, role.getId());
-			preparedStatement.setString(2, role.getName());
-			preparedStatement.setString(3, role.getDescription());
+			preparedStatement.setInt(1, currency.getId());
+			preparedStatement.setString(2, currency.getName());
+			preparedStatement.setString(3, currency.getAbbreviation());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -98,19 +102,19 @@ public class RoleDAO {
 	}
 
 	/**
-	 * updates a Customer
-	 * @param customer
+	 * updates a Currency
+	 * @param currency
 	 * @return
 	 */
-	public int update(Role role) {
+	public int update(Currency currency) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update role set name=? where id=?");
+					connection.prepareStatement("update currency set name=?, abbreviation=? where id=?");
 
-			preparedStatement.setString(1, role.getName());
-			preparedStatement.setInt(2, role.getId());
-			preparedStatement.setString(3, role.getDescription());
+			preparedStatement.setString(1, currency.getName());
+			preparedStatement.setInt(3, currency.getId());
+			preparedStatement.setString(2, currency.getAbbreviation());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -124,14 +128,14 @@ public class RoleDAO {
 	}
 
 	/**
-	 * delete one customer
+	 * delete one currency
 	 * @return
 	 */
 	public int delete(int id) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("delete from role where id=?");
+					connection.prepareStatement("delete from currency where id=?");
 
 			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
@@ -145,5 +149,9 @@ public class RoleDAO {
 		} 
 		return result[0];
 	}
+	
+	
+	
+	
 
 }

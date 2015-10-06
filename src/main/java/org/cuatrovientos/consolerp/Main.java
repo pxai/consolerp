@@ -2,6 +2,11 @@ package org.cuatrovientos.consolerp;
 
 import java.util.Scanner;
 
+
+
+import org.cuatrovientos.consolerp.dao.CustomerDAO;
+
+
 /**
  * Main entrypoint for consolerp project
  * 
@@ -19,12 +24,15 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("currency");
+			System.out.println("supplier");
 			System.out.println("stock");
 			System.out.println("city");
 			System.out.println("role");
 			System.out.println("employee");
 			System.out.println("payroll");
-			
+
+
 			option = reader.nextLine();
 
 			switch (option) {
@@ -32,6 +40,7 @@ public class Main {
 				tableManager = new ManageCustomer(reader);
 				tableManager.manage();
 				break;
+
 			case "stock":
 				tableManager = new ManageStock(reader);
 				tableManager.manage();
@@ -49,6 +58,14 @@ public class Main {
 				break;
 			case "payroll":
 				tableManager = new ManagePayroll(reader);
+				tableManager.manage();
+				break;
+			case "currency":
+				tableManager = new ManageCurrency(reader);
+				tableManager.manage();
+				break;
+			case "supplier":
+				tableManager = new ManageSupplier(reader);
 				tableManager.manage();
 				break;
 			case "exit":

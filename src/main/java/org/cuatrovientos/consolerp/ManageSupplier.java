@@ -3,20 +3,20 @@ package org.cuatrovientos.consolerp;
 import java.util.Scanner;
 import java.util.Vector;
 
-import org.cuatrovientos.consolerp.dao.CustomerDAO;
-import org.cuatrovientos.consolerp.model.Customer;
+import org.cuatrovientos.consolerp.dao.SupplierDAO;
+import org.cuatrovientos.consolerp.model.Supplier;
 
-public class ManageCustomer 
+public class ManageSupplier 
 	extends ManageTable {
 	
-	private CustomerDAO customerDAO;
+	private SupplierDAO supplierDAO;
 	private Scanner reader;
 
 	/**
 	 * constructor
 	 */
-	public ManageCustomer (Scanner reader) {
-		customerDAO = new CustomerDAO();
+	public ManageSupplier (Scanner reader) {
+		supplierDAO = new SupplierDAO();
 		this.reader = reader;
 	}
 	
@@ -24,66 +24,70 @@ public class ManageCustomer
 	public void manage() {
 		String option;
 		String name;
-		Customer customer;
+		String phone;
+		Supplier supplier;
 		int id = 0;
 		do {
-			showMenu("Customer");
+			showMenu("Supplier");
 
 			option = reader.nextLine();
 
 			switch (option) {
 			case "1":
-				Vector<Customer> result = customerDAO.selectAll();
+				Vector<Supplier> result = supplierDAO.selectAll();
 				System.out.println(result.toString());
 				break;
 			case "2":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
-				customer = customerDAO.selectById(id);
-				System.out.println(customer.toString());
+				supplier = supplierDAO.selectById(id);
+				System.out.println(supplier.toString());
 				break;
 			case "3":
 				System.out.println("Enter a name");
 				name = reader.nextLine();
-				customer = customerDAO.selectByName(name);
-				System.out.println(customer.toString());
+				supplier = supplierDAO.selectByName(name);
+				System.out.println(supplier.toString());
 				break;
 			case "4":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
 				name = reader.nextLine();
-				customer = new Customer(id, name);
-				customerDAO.insert(customer);
+				System.out.println("Enter a phone");
+				phone = reader.nextLine();
+				supplier = new Supplier(id, name, phone);
+				supplierDAO.insert(supplier);
 				break;
 			case "5":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
 				name = reader.nextLine();
-				customer = new Customer(id, name);
-				customerDAO.update(customer);
+				System.out.println("Enter a phone");
+				phone = reader.nextLine();
+				supplier = new Supplier(id, name, phone);
+				supplierDAO.update(supplier);
 				break;
 			case "6":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
-				customerDAO.delete(id);
+				supplierDAO.delete(id);
 				break;
 			case "7":
 				System.out.println("Enter a CSV filename to Import");
 				name = reader.nextLine();
-				customerDAO.importCSV(name);
+				supplierDAO.importCSV(name);
 				break;
 			case "8":
 				System.out.println("Enter a CSV filename to Export");
 				name = reader.nextLine();
-				customerDAO.exportCSV(name);
+				supplierDAO.exportCSV(name);
 				break;
 			default:
 				System.out.println("Ok, see you around");
 				break;
 			}
-
 		} while (!option.equals("9"));
 	}
 

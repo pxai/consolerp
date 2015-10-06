@@ -4,84 +4,68 @@
 package org.cuatrovientos.consolerp.model;
 
 /**
- * POJO Employee
- * @author Bego Lopez
+ * @author segoitz-guibert
  *
  */
-public class Employee {
+public class Currency {
 	private int id;
 	private String name;
-	private String phone;
+	private String abbreviation;
 	
-	/**
-	 * void constructor
-	 */
-	public Employee (){
+	public Currency () {
 		
 	}
 	
 	/**
-	 * Constructor
 	 * @param id
 	 * @param name
-	 * @param phone
+	 * @param abbreviation
 	 */
-	public Employee(int id, String name, String phone) {
+	
+	public Currency(int id, String name, String abbreviation){
 		this.id = id;
 		this.name = name;
-		this.phone = phone;
+		this.abbreviation=abbreviation;
 	}
-
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	/**
-	 * @return the phone
+	 * @return the abbreviation
 	 */
-	public String getPhone() {
-		return phone;
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+	/**
+	 * @param abbreviation the abbreviation to set
+	 */
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
 	}
 
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", phone=" + phone + "]";
+		return "Currency [id=" + id + ", name=" + name + ", abbreviation=" + abbreviation + "]";
 	}
-	
-	
-
 }

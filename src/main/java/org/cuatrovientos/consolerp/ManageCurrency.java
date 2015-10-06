@@ -1,22 +1,31 @@
+/**
+ * 
+ */
 package org.cuatrovientos.consolerp;
 
 import java.util.Scanner;
 import java.util.Vector;
 
-import org.cuatrovientos.consolerp.dao.CityDAO;
-import org.cuatrovientos.consolerp.model.City;
+import org.cuatrovientos.consolerp.dao.CurrencyDAO;
+import org.cuatrovientos.consolerp.dao.CustomerDAO;
+import org.cuatrovientos.consolerp.model.Currency;
+import org.cuatrovientos.consolerp.model.Customer;
 
-public class ManageCity 
+/**
+ * @author segoitz-guibert
+ *
+ */
+public class ManageCurrency 
 	extends ManageTable {
 		
-		private CityDAO cityDAO;
+		private CurrencyDAO currencyDAO;
 		private Scanner reader;
 
 		/**
 		 * constructor
 		 */
-		public ManageCity (Scanner reader) {
-			cityDAO = new CityDAO();
+		public ManageCurrency(Scanner reader) {
+			currencyDAO = new CurrencyDAO();
 			this.reader = reader;
 		}
 		
@@ -24,49 +33,49 @@ public class ManageCity
 		public void manage() {
 			String option;
 			String name;
-			City city;
+			String abbreviation;
+			Currency currency;
 			int id = 0;
-			int zipcode =0;
 			do {
-				showMenu("City");
+				showMenu("Customer");
 
 				option = reader.nextLine();
 
 				switch (option) {
 				case "1":
-					Vector<City> result = cityDAO.selectAll();
+					Vector<Currency> result = currencyDAO.selectAll();
 					System.out.println(result.toString());
 					break;
 				case "2":
 					System.out.println("Enter an Id");
 					id = Integer.parseInt(reader.nextLine());
-					city = cityDAO.selectById(id);
-					System.out.println(city.toString());
+					currency = currencyDAO.selectById(id);
+					System.out.println(currency.toString());
 					break;
 				case "3":
 					System.out.println("Enter an Id");
 					id = Integer.parseInt(reader.nextLine());
 					System.out.println("Enter a name");
 					name = reader.nextLine();
-					System.out.println("Enter a zipcode");
-					zipcode = Integer.parseInt(reader.nextLine());
-					city = new City(id, name, zipcode);
-					cityDAO.insert(city);
+					System.out.println("Enter an abbreviation");
+					abbreviation = reader.nextLine();
+					currency = new Currency(id, name,abbreviation);
+					currencyDAO.insert(currency);
 					break;
 				case "4":
 					System.out.println("Enter existing Id");
 					id = Integer.parseInt(reader.nextLine());
 					System.out.println("Enter a name");
 					name = reader.nextLine();
-					System.out.println("Enter a zipcode");
-					zipcode = Integer.parseInt(reader.nextLine());
-					city = new City(id, name, zipcode);
-					cityDAO.update(city);
+					System.out.println("Enter an abbreviation");
+					abbreviation = reader.nextLine();
+					currency = new Currency(id, name,abbreviation);
+					currencyDAO.update(currency);
 					break;
 				case "5":
 					System.out.println("Enter existing Id");
 					id = Integer.parseInt(reader.nextLine());
-					cityDAO.delete(id);
+					currencyDAO.delete(id);
 					break;
 				default:
 					System.out.println("Ok, see you around");
@@ -75,4 +84,6 @@ public class ManageCity
 			} while (!option.equals("6"));
 		}
 
-}
+	}
+
+
