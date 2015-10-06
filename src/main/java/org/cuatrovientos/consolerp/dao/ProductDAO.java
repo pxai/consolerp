@@ -3,6 +3,10 @@
  */
 package org.cuatrovientos.consolerp.dao;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import org.cuatrovientos.consolerp.ManageCustomer;
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.Customer;
 import org.cuatrovientos.consolerp.model.Product;
@@ -149,5 +154,78 @@ public class ProductDAO {
 		} 
 		return result[0];
 	}
+	
+	public int findName(String name) {
+		int[] result;
+		try {
+			PreparedStatement preparedStatement =
+					connection.prepareStatement("select * from product where name = ? ");
+			preparedStatement.setString(1, name);
+			preparedStatement.addBatch();
+			result = preparedStatement.executeBatch();
 
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+			return -1;
+		} 
+		return result[0];
+	}
+	
+	public void loadProducts() {
+		String linea;
+	
+		try {
+			
+			FileReader reader = new FileReader("import.csv");
+			BufferedReader br = new BufferedReader(reader);
+			
+			
+			while ((linea = br.readLine()) != null) {
+				Product oneProduct = new Product();
+				String[] campos = linea.split(",");
+				
+				
+				oneProduct.setId(Integer.parseInt(campos[0]));
+				oneProduct.setName(campos[1]);
+				oneProduct.setPrice(Integer.parseInt(campos[2]));
+				
+				insert(oneProduct);
+				
+			} 
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+			
+		
+	}
+	
+	public void saveProducts() {
+		
+		Vector<Product> listOfProducts = new Vector<Product>();
+		listOfProducts = selectAll();
+		
+		try {
+			FileWriter writer = new FileWriter("import.csv");
+			for (int i=0; i<listOfProducts.size(); i++) {
+	
+			writer.append(listOfProducts.elementAt(i).getId()+ ",");
+			writer.append (listOfProducts.elementAt(i).getName()+ ",");
+			writer.append (""+listOfProducts.elementAt(i).getPrice());
+			writer.append("\n");
+			
+			}
+			
+			writer.close();
+			} catch (IOException e) {
+
+			e.printStackTrace();
+
+			}
+	}
+
+	
+	
+	
 }

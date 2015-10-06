@@ -29,5 +29,5 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 
 + Oskar Compains Iso(Scrum Master)
 
-
++ Aitor Jauregi branch pushed
 

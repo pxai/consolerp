@@ -40,6 +40,9 @@ public class Main {
 
 
 
+
+			System.out.println("product");
+
 			option = reader.nextLine();
 
 			switch (option) {
@@ -80,6 +83,12 @@ public class Main {
 				tableManager.manage();
 				break;
 			
+
+			case "product":
+				//tableManager = new ManageProduct(reader);
+				//tableManager.manage();
+				break;
+
 			case "exit":
 				System.out.println("Bye!");
 				break;
