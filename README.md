@@ -17,7 +17,6 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Pello, branch pushed
 
 + Daniel Martin, branch pushed
-=======
 
 + Bassbeats, branch hyperPushed
 
@@ -36,6 +35,3 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Daniel Martin
 
 
-
->>>>>>> branch 'master' of https://github.com/pxai/consolerp
->>>>>>> branch 'master' of https://github.com/pxai/consolerp

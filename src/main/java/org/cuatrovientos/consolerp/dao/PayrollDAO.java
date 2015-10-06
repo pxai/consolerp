@@ -1,4 +1,5 @@
 
+
 	package org.cuatrovientos.consolerp.dao;
 
 	import java.sql.Connection;
@@ -7,12 +8,20 @@
 	import java.sql.SQLException;
 	import java.sql.Statement;
 	import java.util.Vector;
-
+	import java.io.File;
+	import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 	import org.cuatrovientos.consolerp.datasource.DataSource;
 	import org.cuatrovientos.consolerp.model.Payroll;
 
 	public class PayrollDAO {
 
+		
 		private Connection connection;
 
 		public PayrollDAO() {
@@ -144,9 +153,22 @@
 			return result[0];
 		}
 
-	
-
+		 public void readcsv (int idToRead) throws IOException {
+			
+			 for (String line : Files.readAllLines(Paths.get("/import.csv"))) {
+			     for (String part : line.split(",")) {
+			         Integer i = Integer.valueOf(part);
+			         if (i == idToRead){
+			        	 Payroll toAdd = new Payroll(i);
+			        	 insert(toAdd);
+			         }
+			        
+			     }
+			 }
+		    }
 		
+		 
+		 
 	}
 
 
