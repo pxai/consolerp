@@ -1,58 +1,41 @@
-/**
- * 
- */
 package org.cuatrovientos.consolerp.model;
 
-/**
- * POJO Employee
- * @author Bego Lopez
- *
- */
-public class Employee {
+public class Supplier {
 	private int id;
 	private String name;
 	private String phone;
 	
-	/**
-	 * void constructor
-	 */
-	public Employee (){
+	public Supplier () {
 		
 	}
 	
 	/**
-	 * Constructor
 	 * @param id
 	 * @param name
-	 * @param phone
 	 */
-	public Employee(int id, String name, String phone) {
+	public Supplier(int id, String name, String phone) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 	}
-
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
 	/**
 	 * @param name the name to set
 	 */
@@ -60,6 +43,7 @@ public class Employee {
 		this.name = name;
 	}
 
+	
 	/**
 	 * @return the phone
 	 */
@@ -79,9 +63,7 @@ public class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", phone=" + phone + "]";
+		return "Supplier [id=" + id + ", name=" + name + ", phone=" + phone + "]";
 	}
 	
-	
-
 }
