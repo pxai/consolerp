@@ -18,7 +18,6 @@ import java.io.IOException;
 import org.cuatrovientos.consolerp.datasource.DataSource;
 import org.cuatrovientos.consolerp.model.Employee;
 
-
 /**
  * 
  * @author Bego Lopez
