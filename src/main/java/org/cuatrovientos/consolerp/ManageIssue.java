@@ -45,13 +45,19 @@ public class ManageIssue extends ManageTable{
 				Vector<Issue> result = issueDAO.selectAll();
 				System.out.println(result.toString());
 				break;
+			case "3":
+				System.out.println("Enter a Name");
+				name = reader.nextLine();
+				issue = issueDAO.selectByName(name);
+				System.out.println(issue.toString());
+				break;
 			case "2":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
 				issue = issueDAO.selectById(id);
 				System.out.println(issue.toString());
 				break;
-			case "3":
+			case "4":
 				System.out.println("Enter an Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -61,7 +67,7 @@ public class ManageIssue extends ManageTable{
 				issue = new Issue(id, name, description);
 				issueDAO.insert(issue);
 				break;
-			case "4":
+			case "5":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				System.out.println("Enter a name");
@@ -71,7 +77,7 @@ public class ManageIssue extends ManageTable{
 				issue = new Issue(id, name, description);
 				issueDAO.update(issue);
 				break;
-			case "5":
+			case "6":
 				System.out.println("Enter existing Id");
 				id = Integer.parseInt(reader.nextLine());
 				issueDAO.delete(id);
@@ -80,7 +86,7 @@ public class ManageIssue extends ManageTable{
 				System.out.println("Ok, see you around");
 				break;
 			}
-		} while (!option.equals("6"));
+		} while (!option.equals("7"));
 	}
 
 }

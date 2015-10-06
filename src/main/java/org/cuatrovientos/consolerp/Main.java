@@ -1,10 +1,11 @@
 package org.cuatrovientos.consolerp;
 
 import java.util.Scanner;
-import java.util.Vector;
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
+import org.cuatrovientos.consolerp.dao.IssueDAO;
 import org.cuatrovientos.consolerp.model.Customer;
+import org.cuatrovientos.consolerp.model.Issue;
 
 /**
  * Main entrypoint for consolerp project
@@ -15,9 +16,8 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello DAM");
 		String option = "0";
-		int id = 0;
-		String name = "";
 		Customer customer = null;
+		Issue issue = null;
 		Scanner reader = new Scanner(System.in);
 		
 		// Interface for table management
@@ -26,12 +26,17 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("issue");
 
 			option = reader.nextLine();
 
 			switch (option) {
 			case "customer":
 				tableManager = new ManageCustomer(reader);
+				tableManager.manage();
+				break;
+			case "issue":
+				tableManager = new ManageIssue(reader);
 				tableManager.manage();
 				break;
 			case "exit":
@@ -57,6 +62,9 @@ public class Main {
 		
 
 	}
+	
 
 
 }
+	
+	

@@ -3,6 +3,9 @@
  */
 package org.cuatrovientos.consolerp.dao;
 
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +14,6 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
-import org.cuatrovientos.consolerp.model.Customer;
 import org.cuatrovientos.consolerp.model.Issue;
 
 
@@ -52,7 +54,7 @@ public class IssueDAO {
 	}
 	
 	/**
-	 * select one issue
+	 * select one issue by id
 	 * @param id
 	 * @return
 	 */
@@ -62,7 +64,7 @@ public class IssueDAO {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("select * from issue where id = ? ");
 
-			preparedStatement.setInt(1, 2);
+			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,6 +80,32 @@ public class IssueDAO {
 	}
 	 
 	 /**
+	  * select one issue by name
+	  * @param name
+	  * @return
+	  */
+	 public Issue selectByName(String name){
+		 Issue issue = new Issue();
+		 try {
+				PreparedStatement preparedStatement =
+						connection.prepareStatement("select * from issue where name like '"+name+"'");
+
+				preparedStatement.setString(2,name);
+				preparedStatement.addBatch();
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+
+				if (resultSet.next()) {
+				 issue = new Issue(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
+				}
+			} catch (SQLException e) {
+				System.err.println("Exception " + e.getMessage());
+				e.printStackTrace();
+			}
+		 return issue;
+	 }
+	 
+	 /**
 	  * insert new issue
 	  * @param issue
 	  * @return
@@ -86,7 +114,7 @@ public class IssueDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("insert into issue values (?,?)");
+					connection.prepareStatement("insert into issue values (?,?,?)");
 
 			preparedStatement.setInt(1, issue.getId());
 			preparedStatement.setString(2, issue.getName());
@@ -153,6 +181,6 @@ public class IssueDAO {
 		return result[0];
 	}
 	 
-	 
+	
 	
 }
