@@ -6,6 +6,9 @@ import java.util.Vector;
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
 import org.cuatrovientos.consolerp.model.Customer;
 
+import org.cuatrovientos.consolerp.dao.DelegationDAO;
+import org.cuatrovientos.consolerp.model.Delegation;
+
 /**
  * Main entrypoint for consolerp project
  * 
@@ -18,6 +21,7 @@ public class Main {
 		int id = 0;
 		String name = "";
 		Customer customer = null;
+		Delegation delegation = null;
 		Scanner reader = new Scanner(System.in);
 		
 		// Interface for table management
@@ -26,12 +30,17 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("delegation");
 
 			option = reader.nextLine();
 
 			switch (option) {
 			case "customer":
 				tableManager = new ManageCustomer(reader);
+				tableManager.manage();
+				break;
+			case "delegation":
+				tableManager = new ManageDelegation(reader);
 				tableManager.manage();
 				break;
 			case "exit":
@@ -54,6 +63,10 @@ public class Main {
 	 * @return
 	 */
 	private static void manageCustomer(Scanner reader, CustomerDAO bd) {
+		
+
+	}
+	private static void manageDelegation(Scanner reader, DelegationDAO bd) {
 		
 
 	}
