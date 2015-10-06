@@ -15,10 +15,26 @@ public class State {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public State(int id, String name, String country) {
+		this.id = id;
+		this.name = name;
+		this.country = country;
 	}
+
+
+
+	public State() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "State [id=" + id + ", name=" + name + ", country=" + country + "]";
+	}
+
+
 
 	public int getId() {
 		return id;

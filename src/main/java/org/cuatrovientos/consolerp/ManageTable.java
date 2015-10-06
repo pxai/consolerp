@@ -9,9 +9,12 @@ package org.cuatrovientos.consolerp;
  *
  */
 public class ManageTable {
-	public void manage () {
-		
-	}
+
+
+	
+public void manage() {
+	
+}
 	
 	/**
 	 * shows menu for a given entity
