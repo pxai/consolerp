@@ -87,6 +87,4 @@ public class ManageEmployee extends ManageTable{
 			}
 		}while(!option.equals("6"));
 	}
-	
-
 }
