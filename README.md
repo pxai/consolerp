@@ -15,7 +15,7 @@ Or [download the zip](https://github.com/pxai/consolerp/archive/master.zip) like
 ## Credits
 All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Pello, branch pushed
-<<<<<<< HEAD
+
 + Daniel Martin, branch pushed
 =======
 
@@ -24,6 +24,8 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + cilvet, all done already
 
 + Gaizka Gorraiz
+
++ Julen García
 
 + Begoña Lopez
 
@@ -35,4 +37,5 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 
 
 
+>>>>>>> branch 'master' of https://github.com/pxai/consolerp
 >>>>>>> branch 'master' of https://github.com/pxai/consolerp
