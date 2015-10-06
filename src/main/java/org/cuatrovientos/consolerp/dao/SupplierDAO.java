@@ -15,17 +15,17 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
-import org.cuatrovientos.consolerp.model.Customer;
+import org.cuatrovientos.consolerp.model.Supplier;
 
 /**
- * @author Pello Altadill
+ * @author Toni ABC
  *
  */
-public class CustomerDAO {
+public class SupplierDAO {
 
 	private Connection connection;
 
-	public CustomerDAO() {
+	public SupplierDAO() {
 		connection = new DataSource().getConnection();
 	}
 
@@ -33,8 +33,8 @@ public class CustomerDAO {
 	 * select all customers
 	 * @return
 	 */
-	public Vector<Customer> selectAll() {
-		Vector<Customer> customers = new Vector<Customer>();
+	public Vector<Supplier> selectAll() {
+		Vector<Supplier> suppliers = new Vector<Supplier>();
 		String select = "select * from customer ";
 		Statement statement;
 		try {
@@ -43,78 +43,82 @@ public class CustomerDAO {
 			ResultSet resultSet = statement.executeQuery(select);
 
 			while (resultSet.next()) {
-				Customer customer = new Customer(resultSet.getInt("id"), resultSet.getString("name"));
-				customers.addElement(customer);
+				Supplier supplier = new Supplier(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("phone"));
+				suppliers.addElement(supplier);
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return customers;
+		return suppliers;
 	}
 
 	/**
-	 * select one Customer
+	 * select one Customer by Id
 	 * @param id
 	 * @return
 	 */
-	public Customer selectById(int id) {
-		Customer customer = new Customer();
+	public Supplier selectById(int id) {
+		Supplier supplier = new Supplier();
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("select * from customer where id = ? ");
+					connection.prepareStatement("select * from supplier where id = ? ");
 
-			preparedStatement.setInt(1, 2);
+			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-			 customer = new Customer(resultSet.getInt("id"), resultSet.getString("name"));
+			 supplier = new Supplier(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("phone"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return customer;
-		
+		return supplier;
 	}
 	
-	public Customer selectByName(String name) {
-		Customer customer = new Customer();
+	/**
+	 * Select One Customer by name
+	 * @param name
+	 * @return
+	 */
+	public Supplier selectByName(String name) {
+		Supplier supplier = new Supplier();
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("select * from customer where name like '%" + name + "%'");
+					connection.prepareStatement("select * from supplier where name like '%" + name + "%'");
 
-			//preparedStatement.setInt(1, 2);
+			//preparedStatement.setString(1, name);
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-			 customer = new Customer(resultSet.getInt("id"), resultSet.getString("name"));
+			 supplier = new Supplier(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("phone"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return customer;
+		return supplier;
 	}
 	
-
 	/**
 	 * insert new customer
 	 * @param customer
 	 * @return
 	 */
-	public int insert(Customer customer) {
+	public int insert(Supplier supplier) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("insert into customer values (?,?)");
+					connection.prepareStatement("insert into supplier values (?,?,?)");
 
-			preparedStatement.setInt(1, customer.getId());
-			preparedStatement.setString(2, customer.getName());
+			preparedStatement.setInt(1, supplier.getId());
+			preparedStatement.setString(2, supplier.getName());
+			preparedStatement.setString(3, supplier.getPhone());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -132,14 +136,15 @@ public class CustomerDAO {
 	 * @param customer
 	 * @return
 	 */
-	public int update(Customer customer) {
+	public int update(Supplier supplier) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update customer set name=? where id=?");
+					connection.prepareStatement("update supplier set name=?, phone=? where id=?");
 
-			preparedStatement.setString(1, customer.getName());
-			preparedStatement.setInt(2, customer.getId());
+			preparedStatement.setString(1, supplier.getName());
+			preparedStatement.setString(2, supplier.getPhone());
+			preparedStatement.setInt(3, supplier.getId());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -160,7 +165,7 @@ public class CustomerDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("delete from customer where id=?");
+					connection.prepareStatement("delete from supplier where id=?");
 
 			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
@@ -174,7 +179,7 @@ public class CustomerDAO {
 		} 
 		return result[0];
 	}
-	
+
 	/**
 	 * Import CSV File method
 	 * @param name
@@ -195,8 +200,8 @@ public class CustomerDAO {
             {
                 //Get all tokens available in line
                 String[] register = line.split(DELIMITER);
-                Customer customer = new Customer(Integer.parseInt(register[0]),register[1]);
-                insert(customer);
+                Supplier supplier = new Supplier(Integer.parseInt(register[0]),register[1],register[2]);
+                insert(supplier);
                 for(String registers : register)
                 {
                     //Print all tokens
@@ -225,21 +230,21 @@ public class CustomerDAO {
 	 */
 	public void exportCSV(String name) {
 		
-		Vector<Customer> customers = selectAll();
+		Vector<Supplier> suppliers = selectAll();
 		
         String fileToParse = name + ".csv";
          
         try {
         	FileWriter writer = new FileWriter(fileToParse);
         	
-        	for (int i = 0; i < customers.size(); i++) {
-        		Customer customer = customers.elementAt(i);
-        		writer.append("" + customer.getId());
-        		writer.append("" + customer.getName());
+        	for (int i = 0; i < suppliers.size(); i++) {
+        		Supplier supplier = suppliers.elementAt(i);
+        		writer.append("" + supplier.getId());
+        		writer.append("," + supplier.getName());
+        		writer.append("," + supplier.getPhone());
         		writer.append("\n");
 			}
     			
-    	    writer.flush();
     	    writer.close();
     	}
     	catch(IOException e) {
@@ -249,37 +254,3 @@ public class CustomerDAO {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

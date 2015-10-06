@@ -1,10 +1,14 @@
 package org.cuatrovientos.consolerp;
 
 import java.util.Scanner;
-import java.util.Vector;
+
+
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
+
+import org.cuatrovientos.consolerp.dao.UserDAO;
 import org.cuatrovientos.consolerp.model.Customer;
+
 
 import org.cuatrovientos.consolerp.dao.DelegationDAO;
 import org.cuatrovientos.consolerp.model.Delegation;
@@ -32,6 +36,18 @@ public class Main {
 			System.out.println("customer");
 			System.out.println("delegation");
 
+			System.out.println("user");
+
+			System.out.println("currency");
+			System.out.println("supplier");
+			System.out.println("stock");
+			System.out.println("city");
+			System.out.println("role");
+			System.out.println("employee");
+			System.out.println("payroll");
+
+
+
 			option = reader.nextLine();
 
 			switch (option) {
@@ -43,6 +59,39 @@ public class Main {
 				tableManager = new ManageDelegation(reader);
 				tableManager.manage();
 				break;
+
+			case "stock":
+				tableManager = new ManageStock(reader);
+				tableManager.manage();
+			case "employee":
+				tableManager = new ManageEmployee(reader);
+				tableManager.manage();
+				break;
+			case "role":
+				tableManager = new ManageRole(reader);
+				tableManager.manage();
+				break;
+			case "city":
+				tableManager = new ManageCity(reader);
+				tableManager.manage();
+				break;
+			case "payroll":
+				tableManager = new ManagePayroll(reader);
+				tableManager.manage();
+				break;
+			case "currency":
+				tableManager = new ManageCurrency(reader);
+				tableManager.manage();
+				break;
+			case "supplier":
+				tableManager = new ManageSupplier(reader);
+				tableManager.manage();
+				break;
+			case "user":
+				tableManager = new ManageUser(reader);
+				tableManager.manage();
+				break;
+			
 			case "exit":
 				System.out.println("Bye!");
 				break;
@@ -52,19 +101,7 @@ public class Main {
 
 			}
 		} while (!option.equals("exit"));
-	}
-
-	/**
-	 * Manage Customer
-	 * 
-	 * @param id
-	 * @param reader
-	 * @param bd
-	 * @return
-	 */
-	private static void manageCustomer(Scanner reader, CustomerDAO bd) {
-		
-
+	
 	}
 	private static void manageDelegation(Scanner reader, DelegationDAO bd) {
 		
@@ -73,3 +110,7 @@ public class Main {
 
 
 }
+
+
+
+
