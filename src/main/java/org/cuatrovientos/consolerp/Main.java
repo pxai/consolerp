@@ -55,30 +55,5 @@ public class Main {
 			}
 		} while (!option.equals("exit"));
 	}
-
-	/**
-	 * Manage Customer
-	 * 
-	 * @param id
-	 * @param reader
-	 * @param bd
-	 * @return
-	 */
-	private static void manageCustomer(Scanner reader, CustomerDAO bd) {
-		
-
-	}
-	/**
-	 * Manage Role
-	 * 
-	 * @param id
-	 * @param reader
-	 * @param bd
-	 * @return
-	 */
-	private static void manageRole(Scanner reader, RoleDAO bd) {
-		
-
-	}
-
+	
 }

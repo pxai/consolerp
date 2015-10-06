@@ -20,9 +20,33 @@ public class RoleDAO {
 	public RoleDAO() {
 		connection = new DataSource().getConnection();
 	}
-
+	
 	/**
-	 * select all customers
+	 * select role by name
+	 * @return
+	 */
+	public Vector<Role> selectByName() {
+		Vector<Role> roles = new Vector<Role>();
+		String name = "";
+		String select = "select * from customer where name = ‘" + name  + "'";
+		Statement statement;
+		try {
+			statement = connection.createStatement();
+
+			ResultSet resultSet = statement.executeQuery(select);
+
+			while (resultSet.next()) {
+				Role customer = new Role(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
+				roles.addElement(customer);
+			}
+		} catch (SQLException e) {
+			System.err.println("Exception " + e.getMessage());
+			e.printStackTrace();
+		}
+		return roles;
+	}
+	/**
+	 * select all roles
 	 * @return
 	 */
 	public Vector<Role> selectAll() {
@@ -46,7 +70,7 @@ public class RoleDAO {
 	}
 
 	/**
-	 * select one Role
+	 * select one Role by ID
 	 * @param id
 	 * @return
 	 */
@@ -72,7 +96,7 @@ public class RoleDAO {
 	}
 
 	/**
-	 * insert new customer
+	 * insert new role
 	 * @param customer
 	 * @return
 	 */
@@ -98,7 +122,7 @@ public class RoleDAO {
 	}
 
 	/**
-	 * updates a Customer
+	 * updates a role
 	 * @param customer
 	 * @return
 	 */
@@ -124,7 +148,7 @@ public class RoleDAO {
 	}
 
 	/**
-	 * delete one customer
+	 * delete one role
 	 * @return
 	 */
 	public int delete(int id) {
