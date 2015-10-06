@@ -18,8 +18,7 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 
 + Daniel Martin, branch pushed
 
-+ Bassbeats, branch hyperPushed
-
++ Bassbeats, branch hyperPushed yes
 + cilvet, all done already
 
 + Gaizka Gorraiz
