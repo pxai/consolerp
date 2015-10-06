@@ -26,7 +26,7 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 
 + Oskar Compains Iso(Scrum Master)
 
-+Yeray García
++ Yeray García
 
 
 
