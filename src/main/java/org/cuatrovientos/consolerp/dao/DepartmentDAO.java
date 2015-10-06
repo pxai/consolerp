@@ -82,14 +82,14 @@ public class DepartmentDAO {
 	 * @param department
 	 * @return
 	 */
-	public int insert(Customer customer) {
+	public int insert(Department department) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("insert into customer values (?,?)");
 
-			preparedStatement.setInt(1, customer.getId());
-			preparedStatement.setString(2, customer.getName());
+			preparedStatement.setInt(1, department.getId());
+			preparedStatement.setString(2, department.getName());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -103,18 +103,18 @@ public class DepartmentDAO {
 	}
 
 	/**
-	 * updates a Customer
-	 * @param customer
+	 * updates a department
+	 * @param department
 	 * @return
 	 */
-	public int update(Customer customer) {
+	public int update(Department department) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
 					connection.prepareStatement("update customer set name=? where id=?");
 
-			preparedStatement.setString(1, customer.getName());
-			preparedStatement.setInt(2, customer.getId());
+			preparedStatement.setString(1, department.getName());
+			preparedStatement.setInt(2, department.getId());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -135,7 +135,7 @@ public class DepartmentDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("delete from customer where id=?");
+					connection.prepareStatement("delete from department where id=?");
 
 			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();

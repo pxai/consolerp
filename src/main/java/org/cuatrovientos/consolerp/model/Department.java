@@ -63,6 +63,10 @@ public class Department {
 	public String toString() {
 		return "Department [id=" + clave + ", name=" + ", description=" + description + "]";
 	}
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
