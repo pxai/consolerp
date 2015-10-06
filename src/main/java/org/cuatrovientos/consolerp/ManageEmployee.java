@@ -73,6 +73,14 @@ public class ManageEmployee extends ManageTable{
 				id = Integer.parseInt(reader.nextLine());
 				employeeDAO.delete(id);
 				break;
+			case "6":
+				System.out.println("Export employees data");
+				employeeDAO.exportCVS();
+				break;
+			case "7":
+				System.out.println("Import employees data");
+				employeeDAO.importCVS();
+				break;
 			default:
 				System.out.println("Ok, see you around");
 				break;

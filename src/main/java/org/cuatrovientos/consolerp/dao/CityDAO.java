@@ -8,16 +8,13 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import org.cuatrovientos.consolerp.datasource.DataSource;
-import org.cuatrovientos.consolerp.model.Role;
+import org.cuatrovientos.consolerp.model.City;
 
 
-
-public class RoleDAO {
-
-
+public class CityDAO {
 	private Connection connection;
 
-	public RoleDAO() {
+	public CityDAO() {
 		connection = new DataSource().getConnection();
 	}
 
@@ -25,9 +22,9 @@ public class RoleDAO {
 	 * select all customers
 	 * @return
 	 */
-	public Vector<Role> selectAll() {
-		Vector<Role> roles = new Vector<Role>();
-		String select = "select * from role ";
+	public Vector<City> selectAll() {
+		Vector<City> cities = new Vector<City>();
+		String select = "select * from city ";
 		Statement statement;
 		try {
 			statement = connection.createStatement();
@@ -35,40 +32,40 @@ public class RoleDAO {
 			ResultSet resultSet = statement.executeQuery(select);
 
 			while (resultSet.next()) {
-				Role customer = new Role(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
-				roles.addElement(customer);
+				City city = new City(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("zipcode"));
+				cities.addElement(city);
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return roles;
+		return cities;
 	}
 
 	/**
-	 * select one Role
+	 * select one City
 	 * @param id
 	 * @return
 	 */
-	public Role selectById(int id) {
-		Role role = new Role();
+	public City selectById(int id) {
+		City city = new City();
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("select * from role where id = ? ");
+					connection.prepareStatement("select * from city where id = ? ");
 
-			preparedStatement.setInt(1, 2);
+			preparedStatement.setInt(1, id );
 			preparedStatement.addBatch();
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			if (resultSet.next()) {
-			 role = new Role(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"));
+			if (resultSet.first()) {
+			 city = new City(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("zipcode"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Exception " + e.getMessage());
 			e.printStackTrace();
 		}
-		return role;
+		return city;
 	}
 
 	/**
@@ -76,15 +73,15 @@ public class RoleDAO {
 	 * @param customer
 	 * @return
 	 */
-	public int insert(Role role) {
+	public int insert(City city) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("insert into role values (?,?,?)");
+					connection.prepareStatement("insert into city values (?,?,?)");
 
-			preparedStatement.setInt(1, role.getId());
-			preparedStatement.setString(2, role.getName());
-			preparedStatement.setString(3, role.getDescription());
+			preparedStatement.setInt(1, city.getId());
+			preparedStatement.setString(2, city.getName());
+			preparedStatement.setInt(3, city.getZipcode());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -98,19 +95,19 @@ public class RoleDAO {
 	}
 
 	/**
-	 * updates a Customer
-	 * @param customer
+	 * updates a City
+	 * @param city
 	 * @return
 	 */
-	public int update(Role role) {
+	public int update(City city) {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("update role set name=? where id=?");
+					connection.prepareStatement("update city set (name=?, zipcode=?) where id=?");
 
-			preparedStatement.setString(1, role.getName());
-			preparedStatement.setInt(2, role.getId());
-			preparedStatement.setString(3, role.getDescription());
+			preparedStatement.setString(1, city.getName());
+			preparedStatement.setInt(3, city.getId());
+			preparedStatement.setInt(2, city.getZipcode());
 			preparedStatement.addBatch();
 			
 			result = preparedStatement.executeBatch();
@@ -131,7 +128,7 @@ public class RoleDAO {
 		int[] result;
 		try {
 			PreparedStatement preparedStatement =
-					connection.prepareStatement("delete from role where id=?");
+					connection.prepareStatement("delete from city where id=?");
 
 			preparedStatement.setInt(1, id);
 			preparedStatement.addBatch();
@@ -147,4 +144,3 @@ public class RoleDAO {
 	}
 
 }
-

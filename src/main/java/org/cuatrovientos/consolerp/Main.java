@@ -4,11 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.Vector;
+
+
 
 import org.cuatrovientos.consolerp.dao.CustomerDAO;
-import org.cuatrovientos.consolerp.dao.RoleDAO;
+
+import org.cuatrovientos.consolerp.dao.UserDAO;
 import org.cuatrovientos.consolerp.model.Customer;
+
+
+import org.cuatrovientos.consolerp.dao.DelegationDAO;
+import org.cuatrovientos.consolerp.model.Delegation;
 
 /**
  * Main entrypoint for consolerp project
@@ -22,6 +28,7 @@ public class Main {
 		int id = 0;
 		String name = "";
 		Customer customer = null;
+		Delegation delegation = null;
 		Scanner reader = new Scanner(System.in);
 		
 		// Interface for table management
@@ -30,8 +37,19 @@ public class Main {
 		do {
 			System.out.println("Please, select a table or exit:");
 			System.out.println("customer");
+			System.out.println("delegation");
+
+			System.out.println("user");
+
+			System.out.println("currency");
+			System.out.println("supplier");
+			System.out.println("stock");
+			System.out.println("city");
 			System.out.println("role");
 			System.out.println("employee");
+			System.out.println("payroll");
+
+
 
 			option = reader.nextLine();
 
@@ -40,6 +58,14 @@ public class Main {
 				tableManager = new ManageCustomer(reader);
 				tableManager.manage();
 				break;
+			case "delegation":
+				tableManager = new ManageDelegation(reader);
+				tableManager.manage();
+				break;
+
+			case "stock":
+				tableManager = new ManageStock(reader);
+				tableManager.manage();
 			case "employee":
 				tableManager = new ManageEmployee(reader);
 				tableManager.manage();
@@ -48,6 +74,27 @@ public class Main {
 				tableManager = new ManageRole(reader);
 				tableManager.manage();
 				break;
+			case "city":
+				tableManager = new ManageCity(reader);
+				tableManager.manage();
+				break;
+			case "payroll":
+				tableManager = new ManagePayroll(reader);
+				tableManager.manage();
+				break;
+			case "currency":
+				tableManager = new ManageCurrency(reader);
+				tableManager.manage();
+				break;
+			case "supplier":
+				tableManager = new ManageSupplier(reader);
+				tableManager.manage();
+				break;
+			case "user":
+				tableManager = new ManageUser(reader);
+				tableManager.manage();
+				break;
+			
 			case "exit":
 				System.out.println("Bye!");
 				break;
@@ -58,29 +105,15 @@ public class Main {
 			}
 		} while (!option.equals("exit"));
 		
-		//Writting
-		String fileName = "roles.txt";
-		try {
-			PrintWriter outputStream = new PrintWriter(fileName);
-			outputStream.println("Roles!");
-			outputStream.close();
-			System.out.println("Done.");
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		//Reading
-		//String fileName = "roles.csv";
-		File file = new File(fileName);
-		Scanner inputStream = new Scanner(fileName);
-		while (inputStream.hasNext()){
-			String data = inputStream.next();
-			String[] values = data.split(",");
-			System.out.println(data);
-		}
-		inputStream.close();
-		
 	}
 	
-}
+
+
+	}
+
+
+
+
+
+
+
