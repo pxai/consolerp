@@ -23,3 +23,6 @@ All 2DAM students at [Cuatrovientos](http://www.cuatrovientos.org)
 + Gaizka Gorraiz
 
 + Begoña Lopez
+
++ Oskar Compains Iso(Scrum Master)
+
